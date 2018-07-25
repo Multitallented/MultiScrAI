@@ -13,6 +13,6 @@ import org.stjs.javascript.Global;
 public class main {
     public static void main(String[] args) {
         new GlobalController();
-        Global.console.log("Tick Finished, used CPU: " + Game.getUsedCpu());
+        Global.console.log("Tick Finished, used CPU: " + Game.cpu.getUsed());
     }
 }

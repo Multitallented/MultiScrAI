@@ -303,12 +303,12 @@ public class RoomController {
     }
 
     private void resetCPU() {
-        cpu = Game.getUsedCpu();
+        cpu = Game.cpu.getUsed();
     }
 
     private void saveCPU(String name) {
         Object prevValue = cpuMemory.$get(name);
-        float value = Game.getUsedCpu() - cpu;
+        float value = Game.cpu.getUsed() - cpu;
         if (prevValue != null) {
             value += (Float) prevValue;
         }
