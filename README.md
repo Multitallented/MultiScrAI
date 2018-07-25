@@ -1,5 +1,6 @@
 scrAI by NickToony
 ===================
+*modified by Multitallented*
 
 About
 -------------
@@ -9,14 +10,8 @@ By using a strongly typed and class based language, this project sets out to dev
 
 Status
 ---------
- - TaskManager manages a rooms current tasks, prioritising them
-	- Intelligently assigns tasks to workers by predicting the future state of the task, preventing units swarming tasks. e.g. don't assign a deposit energy task if it's expected to be filled anyway
- - EconomyAdvisor suggests units to create
-	 - Attempts to produce an idea balance of Workers to Miners
- - Optimum Miner Logic
-	 - Will determine the optimum amount of miners per source, and create specialised creeps for the task
-
-This project is a work in progress. However, the Java->Javascript works if you're interested in that.
+ - This is a blank template for you to create your own Screeps bot in Java
+ - Unit Testing skeleton is in place, but needs work
 
 Dependencies
 ----------
@@ -30,6 +25,8 @@ The following are external dependencies you must install to get the most out of 
  - Screeps Grunt Task
 	 - http://support.screeps.com/hc/en-us/articles/203022512-Commiting-local-scripts-using-Grunt
 	 - requires Grunt and NPM
+	 - build task is commented out in the pom.xml
+	 - grunt-screeps (https://docs.screeps.com/contributed/advanced_grunt.html) requires screepsmod-auth (https://github.com/ScreepsMods/screepsmod-auth) to be installed on your private server
 
 **Provided**
 
@@ -54,6 +51,7 @@ The compiled code is automatically uploaded to your Screeps account. I recommend
 1. Duplicate the *Gruntfile.example.js* file to *Gruntfile.js*
 2. Replace the *email* and *password* fields with your details
 3. *Gruntfile.js* is already added to the .gitignore
+4. Optional: Uncomment the grunt-screeps plugin exec in *pom.xml*
 
 **Compiling and Deploying**
 
@@ -90,36 +88,8 @@ Architecture
 
 **GlobalController**
 
-The GlobalController looks at the map as a whole. It doesn't worry about managing each rooms contents, but the interactions between rooms. It decides where to reinforce, where to expand (or assault) and the parameters affecting each room (such as alert status).
+The GlobalController looks at the map as a whole. It doesn't worry about managing each rooms contents, but the interactions between rooms. It decides where to reinforce, where to expand (or assault) and the parameters affecting each room.
 
 **RoomController**
 
-A layer below GlobalController, this controller is given the responsibility of managing one specific room. It relies on Managers (which organise and act upon room contents) and Advisors (which take the organised data of the Managers and suggests the next move). Which advisor it listens to is decided by the RoomController's threat and alert levels.
-
-**MilitaryAdvisor**
-
-Decides on military matters; units to produce, where to position and defensive structures.
-
-**EconomyAdvisor**
-
-Decides on economy matters: units to produce, which sources to gather, buildings to maintain/build.
-
-**SourcesManager**
-
-Stores all Sources in the room, and determines which are safe to gather from.
-
-**SpawnsManager**
-
-Stores all Spawns in the room, and determines which are available to spawn from.
-
-**TasksManager**
-
-The task manager tracks the memory of each Task currently in the room. Tasks are distributed to Worker creeps in an intelligent manner, which ensures the most important tasks are prioritised and carried out efficiently.
-
-**PopulationManager**
-
-Stores all creeps, and sorts them by type into an array. It creates the correct CreepWrapper class for each, which is useful for allowing the creep to perform its designated function.
-
-**CreepWrapper**
-
-A wrapper for the built-in creep object. Each creep type extends from this class, which tracks the creeps memory and status. It contains the creeps logic.
+A layer below GlobalController, this controller is given the responsibility of managing one specific room.
