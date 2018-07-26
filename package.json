@@ -1,0 +1,26 @@
+{
+  "name": "scrai",
+  "version": "1.0.0",
+  "description": "scrAI by NickToony",
+  "main": "main.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Multitallented/scrAI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Multitallented/scrAI/issues"
+  },
+  "homepage": "https://github.com/Multitallented/scrAI#readme",
+  "dependencies": {
+    "grunt": "^1.0.3",
+    "grunt-cli": "^1.2.0",
+    "grunt-screeps": "^1.4.0",
+    "jasmine": "^3.1.0",
+    "screeps-server-mockup": "^1.1.0"
+  }
+}

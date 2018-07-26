@@ -6,6 +6,8 @@
 /node_modules
 /*.log
 /Gruntfile.js
+/package-lock.json
+/server
 
 #
 # Mac OSX
