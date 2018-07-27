@@ -7,17 +7,14 @@ import com.nicktoony.screeps.Room;
 import org.junit.Before;
 import org.junit.Test;
 import org.stjs.javascript.Array;
-import org.stjs.javascript.Map;
-
-import static org.mockito.Mockito.mock;
+import org.stjs.javascript.JSCollections;
 
 public class ScrAITests {
 
     @Before
     public void setup() {
         Game.rooms = new Array<Room>();
-        Map<String, Object> memory = mock(Map.class);
-        Game.rooms.push(new RoomImpl("Room1", memory));
+        Game.rooms.push(new RoomImpl("Room1", JSCollections.$map()));
     }
 
     @Test
