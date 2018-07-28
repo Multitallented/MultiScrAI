@@ -1,6 +1,6 @@
-scrAI by NickToony
+MultiScrAI by Multitallented
 ===================
-*modified by Multitallented*
+*based on scrAI by NickToony*
 
 About
 -------------

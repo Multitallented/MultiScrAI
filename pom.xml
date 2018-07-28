@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>nicktoony</groupId>
-    <artifactId>scrAI</artifactId>
+    <groupId>org.redcastlemedia.multitallented</groupId>
+    <artifactId>mutliscrai</artifactId>
     <version>deploy</version>
     <packaging>war</packaging>
-    <name>scrAI</name>
+    <name>multiscrai</name>
 
     <properties>
         <stjs.version>3.0.3</stjs.version>
@@ -22,8 +22,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
 
@@ -41,7 +41,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>com/nicktoony/scrAI/**</include>
+                        <include>org/redcastlemedia/multitallented/multiscrai/**</include>
                     </includes>
                 </configuration>
             </plugin>

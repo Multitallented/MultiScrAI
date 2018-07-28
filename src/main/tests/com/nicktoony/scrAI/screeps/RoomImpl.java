@@ -2,7 +2,6 @@ package com.nicktoony.scrAI.screeps;
 
 import com.nicktoony.screeps.Room;
 import com.nicktoony.screeps.RoomPosition;
-import com.nicktoony.screeps.global.*;
 import com.nicktoony.screeps.helpers.Targetable;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.Map;
