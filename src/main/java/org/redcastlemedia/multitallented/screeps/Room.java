@@ -1,6 +1,5 @@
 package org.redcastlemedia.multitallented.screeps;
 
-import org.redcastlemedia.multitallented.screeps.helpers.SurvivalInfo;
 import org.redcastlemedia.multitallented.screeps.helpers.Targetable;
 import org.redcastlemedia.multitallented.screeps.structures.Controller;
 import org.redcastlemedia.multitallented.screeps.structures.Storage;
@@ -26,7 +25,6 @@ public abstract class Room {
     public int energyCapacityAvailable;
     public ModeTypes mode;
     private Storage storage;
-    private SurvivalInfo survivalInfo;
 
     public abstract ResponseTypes createConstructionSite(int x, int y, StructureTypes type);
 

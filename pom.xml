@@ -5,14 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.redcastlemedia.multitallented</groupId>
-    <artifactId>mutliscrai</artifactId>
+    <artifactId>multiscrai</artifactId>
     <version>deploy</version>
     <packaging>war</packaging>
     <name>multiscrai</name>
-
-    <properties>
-        <stjs.version>3.0.3</stjs.version>
-    </properties>
 
     <build>
         <sourceDirectory>src/main/java/</sourceDirectory>
@@ -28,9 +24,10 @@
             </plugin>
 
             <plugin>
+                <!-- https://mvnrepository.com/artifact/org.st-js/shared -->
                 <groupId>org.st-js</groupId>
-                <artifactId>maven-plugin</artifactId>
-                <version>${stjs.version}</version>
+                <artifactId>stjs-maven-plugin</artifactId>
+                <version>3.3.2</version>
                 <executions>
                     <execution>
                         <id>main</id>
@@ -41,43 +38,44 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>org/redcastlemedia/multitallented/multiscrai/**</include>
+                        <include>org/redcastlemedia/multitallented/**</include>
                     </includes>
+                    <pack>true</pack>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>maven-replacer-plugin</artifactId>
-                <version>1.4.1</version>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includes>
-                        <include>target/**/scrAI/**/*.js</include>
-                    </includes>
-                    <replacements>
-                        <replacement>
-                            <token>([ ]*)TemporaryVariables.([\S]+[ ]*=[ ]*null)</token>
-                            <value>$1var $2</value>
-                        </replacement>
+            <!--<plugin>-->
+                <!--<groupId>com.google.code.maven-replacer-plugin</groupId>-->
+                <!--<artifactId>maven-replacer-plugin</artifactId>-->
+                <!--<version>1.4.1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>prepare-package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>replace</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<includes>-->
+                        <!--<include>target/**/multiscrai/generated-js/*.js</include>-->
+                    <!--</includes>-->
+                    <!--<replacements>-->
                         <!--<replacement>-->
-                            <!--<token>[ ]*\*[ ]+ var(.*)</token>-->
-                            <!--<value>*/var $1/*</value>-->
+                            <!--<token>([ ]*)TemporaryVariables.([\S]+[ ]*=[ ]*null)</token>-->
+                            <!--<value>$1var $2</value>-->
                         <!--</replacement>-->
-                        <replacement>
-                            <token>TemporaryVariables.</token>
-                            <value></value>
-                        </replacement>
-                    </replacements>
-                </configuration>
-            </plugin>
+                        <!--&lt;!&ndash;<replacement>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<token>[ ]*\*[ ]+ var(.*)</token>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<value>*/var $1/*</value>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</replacement>&ndash;&gt;-->
+                        <!--<replacement>-->
+                            <!--<token>TemporaryVariables.</token>-->
+                            <!--<value></value>-->
+                        <!--</replacement>-->
+                    <!--</replacements>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
@@ -102,7 +100,7 @@
                             <inputDir>${project.build.directory}/</inputDir>
                             <includes>
                                 <include>../src/main/javascript/stjs.js</include>
-                                <include>${project.build.finalName}/generated-js/com/nicktoony/scrAI/**/*.js</include>
+                                <include>${project.build.finalName}/generated-js/multiscrai.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>

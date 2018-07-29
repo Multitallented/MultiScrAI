@@ -1,24 +1,32 @@
 package org.redcastlemedia.multitallented.multiscrai.roles;
 
-import org.redcastlemedia.multitallented.multiscrai.Controllers.RoomController;
+import org.redcastlemedia.multitallented.multiscrai.controllers.RoomController;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepAction;
+import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepType;
 import org.redcastlemedia.multitallented.screeps.Creep;
 import org.redcastlemedia.multitallented.screeps.Room;
 import org.redcastlemedia.multitallented.screeps.Source;
 import org.redcastlemedia.multitallented.screeps.global.ResponseTypes;
 import org.redcastlemedia.multitallented.screeps.structures.Controller;
 import org.stjs.javascript.JSCollections;
+import org.stjs.javascript.Map;
 
-
+/**
+ * var RoomController = require('RoomController');
+ * var CreepAction = require('CreepAction');
+ * var CreepUtil = require('CreepUtil');
+ */
 public abstract class CreepRole {
     private final Room room;
     private final Creep creep;
+    private final CreepType type;
     protected CreepAction action;
 
-    public CreepRole(Creep creep) {
+    public CreepRole(Creep creep, CreepType type) {
         this.creep = creep;
         this.room = creep.room;
-        this.action = new CreepAction(creep.memory.$get("currentOrder"));
+        this.action = new CreepAction((Map<String, Object>) creep.memory.$get(CreepAction.KEY));
+        this.type = type;
     }
 
     public Room getRoom() {
@@ -27,6 +35,10 @@ public abstract class CreepRole {
 
     public Creep getCreep() {
         return creep;
+    }
+
+    public CreepType getType() {
+        return type;
     }
 
     public void run(RoomController roomController) {

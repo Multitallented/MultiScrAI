@@ -1,5 +1,8 @@
 package org.redcastlemedia.multitallented.screeps.global;
 
+import org.stjs.javascript.annotation.STJSBridge;
+
+@STJSBridge
 public enum ResourceType {
     RESOURCE_ENERGY("energy"),
     RESOURCE_POWER("power"),

@@ -4,10 +4,12 @@ import org.redcastlemedia.multitallented.screeps.global.*;
 import org.redcastlemedia.multitallented.screeps.helpers.Targetable;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.Map;
+import org.stjs.javascript.annotation.STJSBridge;
 
 /**
  * Created by nick on 26/07/15.
  */
+@STJSBridge
 public class RoomPosition extends Targetable {
     public int x;
     public int y;
@@ -59,7 +61,6 @@ public class RoomPosition extends Targetable {
     public ScreepsObject findClosestByRange(FindTypes type, Map<String, Object> options) {
         Room room = Game.rooms.$get(0);
         Array<? extends ScreepsObject> findResults = room.find(type, options);
-        System.out.println(findResults.$length());
         if (findResults.$length() > 0)
             return findResults.$get(0);
         else

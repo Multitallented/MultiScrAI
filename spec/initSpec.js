@@ -34,7 +34,7 @@ describe("Screeps Server Tests", function() {
         if (upgrader == null || sourceId == null) {
             fail();
         }
-        expect(upgrader.memory.currentOrder.targetId).not.toBe(sourceId);
+        expect(upgrader.memory.action.targetId).toBe(sourceId);
     });
 
     it("Full upgrader should start upgrading", async function() {
@@ -58,6 +58,6 @@ describe("Screeps Server Tests", function() {
         if (upgrader == null || controllerId == null) {
             fail();
         }
-        expect(upgrader.memory.currentOrder.target).not.toBe(controllerId);
+        expect(upgrader.memory.action.targetId).toBe(controllerId);
     });
 });

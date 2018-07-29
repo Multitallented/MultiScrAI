@@ -1,24 +1,24 @@
-package org.redcastlemedia.multitallented.multiscrai.Controllers;
+package org.redcastlemedia.multitallented.multiscrai.controllers;
 
 import org.redcastlemedia.multitallented.helpers.Lodash;
 import org.redcastlemedia.multitallented.helpers.LodashCallback2;
 import org.redcastlemedia.multitallented.screeps.Game;
 import org.redcastlemedia.multitallented.screeps.Room;
 import org.stjs.javascript.Array;
+import org.stjs.javascript.Global;
 import org.stjs.javascript.functions.Callback1;
 
 /**
- * Created by nick on 26/07/15.
  *  var stjs = require("stjs");
  *  var Constants = require("Constants");
  *  var RoomController = require("RoomController");
  *  var Lodash = require('lodash');
  */
 public class GlobalManager {
-    private Array<RoomController> roomControllers;
 
     public GlobalManager() {
-        roomControllers = new Array<RoomController>();
+        GlobalManager globalManager = this;
+        final Array<RoomController> roomControllers = new Array<>();
 
         Lodash.forIn(Game.rooms, new LodashCallback2<Room, String>() {
             @Override
@@ -27,7 +27,7 @@ public class GlobalManager {
                 roomControllers.push(new RoomController(room));
                 return true;
             }
-        }, this);
+        }, globalManager);
 
         roomControllers.forEach(new Callback1<RoomController>() {
             @Override

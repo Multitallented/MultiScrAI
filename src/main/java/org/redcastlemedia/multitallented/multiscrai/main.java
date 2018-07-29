@@ -1,8 +1,6 @@
 package org.redcastlemedia.multitallented.multiscrai;
 
-import org.redcastlemedia.multitallented.multiscrai.Controllers.GlobalManager;
-import org.redcastlemedia.multitallented.screeps.Game;
-import org.stjs.javascript.Global;
+import org.redcastlemedia.multitallented.multiscrai.controllers.GlobalManager;
 
 /**
  * Created by nick on 26/07/15.
@@ -13,6 +11,6 @@ import org.stjs.javascript.Global;
 public class main {
     public static void main(String[] args) {
         new GlobalManager();
-        Global.console.log("Tick Finished, used CPU: " + Game.cpu.getUsed());
+//        Global.console.log("Tick Finished, used CPU: " + Game.cpu.getUsed());
     }
 }

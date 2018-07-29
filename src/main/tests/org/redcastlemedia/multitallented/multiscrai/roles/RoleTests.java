@@ -2,11 +2,10 @@ package org.redcastlemedia.multitallented.multiscrai.roles;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.redcastlemedia.multitallented.multiscrai.Controllers.RoomController;
+import org.redcastlemedia.multitallented.multiscrai.controllers.RoomController;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepAction;
 import org.redcastlemedia.multitallented.multiscrai.screeps.RoomImpl;
 import org.redcastlemedia.multitallented.screeps.*;
-import org.redcastlemedia.multitallented.screeps.global.FindTypes;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
 
@@ -57,6 +56,14 @@ public class RoleTests {
         this.upgrader.run(roomController);
         assertEquals(26, this.upgrader.getCreep().pos.x);
         assertEquals(26, this.upgrader.getCreep().pos.y);
+    }
+
+    @Test
+    public void upgraderShouldntStopUpgradingUntilEmpty() {
+        this.upgrader = new Upgrader(createUpgrader(4));
+        this.upgrader.action.setAction(CreepAction.ActionType.UPGRADE_CONTROLLER);
+        this.upgrader.determineAction(roomController);
+        assertEquals(CreepAction.ActionType.UPGRADE_CONTROLLER,this.upgrader.action.getAction());
     }
 
     private Creep createUpgrader(int energy) {

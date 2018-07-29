@@ -1,6 +1,6 @@
 package org.redcastlemedia.multitallented.multiscrai;
 
-import org.redcastlemedia.multitallented.multiscrai.Controllers.GlobalManager;
+import org.redcastlemedia.multitallented.multiscrai.controllers.GlobalManager;
 import org.redcastlemedia.multitallented.multiscrai.screeps.RoomImpl;
 import org.junit.Before;
 import org.junit.Test;

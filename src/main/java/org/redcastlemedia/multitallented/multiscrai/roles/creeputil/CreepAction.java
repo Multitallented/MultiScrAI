@@ -1,25 +1,20 @@
 package org.redcastlemedia.multitallented.multiscrai.roles.creeputil;
 
-import java.lang.reflect.Field;
+import org.stjs.javascript.Map;
 
 public class CreepAction {
+    public static final String KEY = "action";
+    public static final String TARGET_ID = "targetId";
 
-    public CreepAction(Object currentOrder) {
+    public CreepAction(Map<String, Object> currentOrder) {
         if (currentOrder != null) {
-            try {
-                Field field = currentOrder.getClass().getField("targetId");
-                this.targetId = (String) field.get(currentOrder);
-
-                Field field1 = currentOrder.getClass().getField("action");
-                this.action = ActionType.valueOf((String) field1.get(currentOrder));
-            } catch (NoSuchFieldException | IllegalAccessException noSuchFieldException) {
-                noSuchFieldException.printStackTrace();
-            }
+            this.targetId = (String) currentOrder.$get(TARGET_ID);
+            this.action = CreepActionType.valueOf((String) currentOrder.$get(KEY));
         }
     }
 
     private String targetId;
-    private ActionType action;
+    private CreepActionType action;
 
     public String getTargetId() {
         return targetId;
@@ -29,18 +24,11 @@ public class CreepAction {
         this.targetId = targetId;
     }
 
-    public ActionType getAction() {
+    public CreepActionType getAction() {
         return action;
     }
 
-    public void setAction(ActionType action) {
+    public void setAction(CreepActionType action) {
         this.action = action;
-    }
-
-
-    public enum ActionType {
-        MOVE,
-        HARVEST,
-        UPGRADE_CONTROLLER
     }
 }

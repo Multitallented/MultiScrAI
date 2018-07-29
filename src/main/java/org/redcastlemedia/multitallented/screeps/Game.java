@@ -4,10 +4,12 @@ import org.redcastlemedia.multitallented.screeps.structures.Spawn;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
+import org.stjs.javascript.annotation.STJSBridge;
 
 /**
  * Created by nick on 26/07/15.
  */
+@STJSBridge
 public class Game {
     public static Array<Room> rooms;
     public static int time;

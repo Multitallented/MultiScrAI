@@ -7,11 +7,12 @@ import org.redcastlemedia.multitallented.screeps.structures.Controller;
 import org.redcastlemedia.multitallented.screeps.structures.Structure;
 import org.redcastlemedia.multitallented.screeps.interfaces.DepositableStructure;
 import org.stjs.javascript.Array;
+import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
+import org.stjs.javascript.annotation.Adapter;
+import org.stjs.javascript.annotation.STJSBridge;
 
-/**
- * Created by nick on 26/07/15.
- */
+@STJSBridge
 public class Creep extends ScreepsObject {
     public String name;
     public RoomPosition pos;
@@ -20,6 +21,10 @@ public class Creep extends ScreepsObject {
     public Carry carry;
     public int carryCapacity;
     public int fatigue;
+
+    public Creep() {
+        memory = JSCollections.$map();
+    }
 
     public int harvest(Source source) {
         if (RoomPosition.distance(source.pos, pos) > 1) {

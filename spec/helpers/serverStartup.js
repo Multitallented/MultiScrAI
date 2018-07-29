@@ -1,6 +1,6 @@
 let fs = require('fs');
 const path = require('path');
-const file = fs.readFileSync(path.resolve(__dirname, '../../target/scrAI-deploy/main.js'));
+const file = fs.readFileSync(path.resolve(__dirname, '../../target/multiscrai-deploy/main.js'));
 const _ = require('lodash');
 
 module.exports = {
