@@ -56,12 +56,25 @@ public class RoomPosition extends Targetable {
      * @param options parameters for the search
      * @return response
      */
-    public ResponseTypes findClosest(FindTypes type, Map<String, Object> options) {
-        return ResponseTypes.OK;
+    public ScreepsObject findClosestByRange(FindTypes type, Map<String, Object> options) {
+        Room room = Game.rooms.$get(0);
+        Array<? extends ScreepsObject> findResults = room.find(type, options);
+        System.out.println(findResults.$length());
+        if (findResults.$length() > 0)
+            return findResults.$get(0);
+        else
+            return null;
     }
 
-    public ResponseTypes findClosest(Array<Targetable> objects, Map<String, Object> options) {
-        return ResponseTypes.OK;
+    public ScreepsObject findClosestByRange(Array<Targetable> objects, Map<String, Object> options) {
+        return null;
+    }
+    public ScreepsObject findClosestByPath(FindTypes type, Map<String, Object> options) {
+        return null;
+    }
+
+    public ScreepsObject findClosestByPath(Array<Targetable> objects, Map<String, Object> options) {
+        return null;
     }
 
     public Array<? extends ScreepsObject> findInRange(FindTypes type, int range, Map<String, Object> options) {
@@ -114,5 +127,9 @@ public class RoomPosition extends Targetable {
 
     public Array<Map<String, Object>> lookFor(String type) {
         return null;
+    }
+
+    public static int distance(RoomPosition pos1, RoomPosition pos2) {
+        return Math.max(Math.abs(pos1.x - pos2.x), Math.abs(pos1.y - pos2.y));
     }
 }

@@ -1,6 +1,8 @@
 package org.redcastlemedia.multitallented.screeps;
 
+import org.redcastlemedia.multitallented.screeps.global.ResponseTypes;
 import org.redcastlemedia.multitallented.screeps.global.ScreepsObject;
+import org.redcastlemedia.multitallented.screeps.interfaces.StorableStructure;
 import org.redcastlemedia.multitallented.screeps.structures.Controller;
 import org.redcastlemedia.multitallented.screeps.structures.Structure;
 import org.redcastlemedia.multitallented.screeps.interfaces.DepositableStructure;
@@ -10,27 +12,99 @@ import org.stjs.javascript.Map;
 /**
  * Created by nick on 26/07/15.
  */
-public abstract class Creep extends ScreepsObject {
+public class Creep extends ScreepsObject {
     public String name;
     public RoomPosition pos;
     public Map<String, Object> memory;
     public Array<String> body;
     public Carry carry;
     public int carryCapacity;
+    public int fatigue;
 
-    public void harvest(Source target) {
-
+    public int harvest(Source source) {
+        if (RoomPosition.distance(source.pos, pos) > 1) {
+            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+        }
+        return ResponseTypes.OK.getCode();
     }
 
-    public abstract int moveTo(Object target, Map<String, ?> opts);
+    public int moveTo(ScreepsObject target, Map<String, ?> opts) {
+        if (fatigue > 0) {
+            return ResponseTypes.ERR_TIRED.getCode();
+        }
+        pos.x = pos.x > target.pos.x && pos.x > 0 ? pos.x - 1 :
+                pos.x < target.pos.x && pos.x < 49 ? pos.x + 1 : pos.x;
+        pos.y = pos.y > target.pos.y && pos.y > 0 ? pos.y - 1 :
+                pos.y < target.pos.y && pos.y < 49 ? pos.y + 1: pos.y;
+        return ResponseTypes.OK.getCode();
+    }
 
-    public abstract int transferEnergy(DepositableStructure target);
+    public int transfer(ScreepsObject target, int type) {
+        return transfer(target, type, Math.min(carry.energy, carryCapacity));
+    }
 
-    public abstract void pickup(Energy energy);
+    public int transfer(ScreepsObject target, int type, int amount) {
+        if (RoomPosition.distance(target.pos, pos) > 1) {
+            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+        }
+        if (target instanceof DepositableStructure) {
+            DepositableStructure depo = (DepositableStructure) target;
+            int diff = depo.energyCapacity - depo.energy;
+            if (diff > amount) {
+                depo.energy = depo.energy + amount;
+                carry.energy -= amount;
+            } else {
+                carry.energy -= diff;
+                depo.energy = depo.energyCapacity;
+            }
+        } else if (target instanceof StorableStructure) {
+            StorableStructure depo = (StorableStructure) target;
+            int diff = depo.storageCapacity - depo.store.energy;
+            if (diff > amount) {
+                depo.store.energy = depo.store.energy + amount;
+                carry.energy -= amount;
+            } else {
+                carry.energy -= diff;
+                depo.store.energy = depo.storageCapacity;
+            }
+        } else {
+            return ResponseTypes.ERR_INVALID_TARGET.getCode();
+        }
+        return ResponseTypes.OK.getCode();
+    }
 
-    public abstract void upgradeController(Controller controller);
+    public int pickup(Energy energy) {
+        if (RoomPosition.distance(energy.pos, pos) > 1) {
+            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+        }
+        if (carryCapacity > energy.energy + carry.energy) {
+            carry.energy = carry.energy + energy.energy;
+            energy.energy = 0;
+        } else {
+            energy.energy -= carryCapacity - carry.energy;
+            carry.energy = carryCapacity;
+        }
+        return ResponseTypes.OK.getCode();
+    }
 
-    public abstract void build(ConstructionSite buildable);
+    public int upgradeController(Controller controller) {
+        if (RoomPosition.distance(controller.pos, pos) > 1) {
+            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+        }
+        return ResponseTypes.OK.getCode();
+    }
 
-    public abstract void repair(Structure buildable);
+    public int build(ConstructionSite buildable) {
+        if (RoomPosition.distance(buildable.pos, pos) > 3) {
+            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+        }
+        return ResponseTypes.OK.getCode();
+    }
+
+    public int repair(Structure buildable) {
+        if (RoomPosition.distance(buildable.pos, pos) > 1) {
+            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+        }
+        return ResponseTypes.OK.getCode();
+    }
 }

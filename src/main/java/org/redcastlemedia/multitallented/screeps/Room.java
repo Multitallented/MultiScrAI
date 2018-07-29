@@ -5,6 +5,7 @@ import org.redcastlemedia.multitallented.screeps.helpers.Targetable;
 import org.redcastlemedia.multitallented.screeps.structures.Controller;
 import org.redcastlemedia.multitallented.screeps.structures.Storage;
 import org.redcastlemedia.multitallented.screeps.global.*;
+import org.redcastlemedia.multitallented.screeps.structures.Structure;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.Map;
 import org.stjs.javascript.annotation.STJSBridge;
@@ -14,6 +15,10 @@ import org.stjs.javascript.annotation.STJSBridge;
  */
 @STJSBridge
 public abstract class Room {
+    public Array<Creep> creeps = new Array<>();
+    public Array<Structure> structures = new Array<>();
+    public Array<Source> sources = new Array<>();
+
     public String name;
     public Map<String, Object> memory;
     public Controller controller;

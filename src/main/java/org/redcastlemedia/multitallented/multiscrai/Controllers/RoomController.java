@@ -1,7 +1,18 @@
 package org.redcastlemedia.multitallented.multiscrai.Controllers;
 
-import org.redcastlemedia.multitallented.screeps.Game;
-import org.redcastlemedia.multitallented.screeps.Room;
+import org.redcastlemedia.multitallented.helpers.Lodash;
+import org.redcastlemedia.multitallented.helpers.LodashCallback;
+import org.redcastlemedia.multitallented.helpers.LodashCallback1;
+import org.redcastlemedia.multitallented.helpers.LodashCallback2;
+import org.redcastlemedia.multitallented.multiscrai.roles.CreepRole;
+import org.redcastlemedia.multitallented.multiscrai.roles.Upgrader;
+import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepUtil;
+import org.redcastlemedia.multitallented.screeps.*;
+import org.redcastlemedia.multitallented.screeps.global.FindTypes;
+import org.redcastlemedia.multitallented.screeps.global.ResponseTypes;
+import org.redcastlemedia.multitallented.screeps.global.ScreepsObject;
+import org.redcastlemedia.multitallented.screeps.structures.Structure;
+import org.stjs.javascript.Array;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
 
@@ -10,6 +21,7 @@ import org.stjs.javascript.Map;
  */
 public class RoomController {
 
+    private final RoomController roomController;
     // room globals
     public boolean hasPathFound = false;
 
@@ -19,6 +31,7 @@ public class RoomController {
 
     public RoomController(Room room) {
         this.room = room;
+        this.roomController = this;
 
         // Check if memory is defined
         if (this.room.memory.$get("created") == null) {
@@ -40,7 +53,27 @@ public class RoomController {
     }
 
     public void step() {
+        Array<Creep> creeps = (Array<Creep>) room.find(FindTypes.FIND_CREEPS, JSCollections.$map());
+        Lodash.forIn(creeps, new LodashCallback1<Creep>() {
+
+            @Override
+            public boolean invoke(Creep creep) {
+                CreepUtil.runByRole(creep, roomController);
+                return false;
+            }
+        }, this);
+
+
+//
+//        Array<Structure> structures = (Array<Structure>) room.find(FindTypes.FIND_STRUCTURES, JSCollections.$map());
+
         //TODO add room logic
+    }
+
+    public Source getAvailableHarvest(RoomPosition roomPosition, boolean reserve) {
+        Source source = (Source) roomPosition.findClosestByRange(FindTypes.FIND_SOURCES, JSCollections.$map());
+        //TODO add more sophisticated logic
+        return source;
     }
 
     private Map<String, Object> getMemory(String name) {

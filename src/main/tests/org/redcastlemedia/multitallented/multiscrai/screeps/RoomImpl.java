@@ -1,16 +1,22 @@
-package com.nicktoony.scrAI.screeps;
+package org.redcastlemedia.multitallented.multiscrai.screeps;
 
-import com.nicktoony.screeps.Room;
-import com.nicktoony.screeps.RoomPosition;
-import com.nicktoony.screeps.helpers.Targetable;
+import org.redcastlemedia.multitallented.screeps.Creep;
+import org.redcastlemedia.multitallented.screeps.Room;
+import org.redcastlemedia.multitallented.screeps.RoomPosition;
+import org.redcastlemedia.multitallented.screeps.Source;
+import org.redcastlemedia.multitallented.screeps.global.*;
+import org.redcastlemedia.multitallented.screeps.helpers.Targetable;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.Map;
 
 
 public class RoomImpl extends Room {
+
     public RoomImpl(String name, Map<String, Object> memory) {
         super.name = name;
         super.memory = memory;
+        this.controller = new ControllerImpl();
+        this.controller.pos = new RoomPosition(30, 30, name);
     }
 
     @Override
@@ -35,6 +41,13 @@ public class RoomImpl extends Room {
 
     @Override
     public Array<? extends ScreepsObject> find(FindTypes type, Map<String, Object> options) {
+        if (type == FindTypes.FIND_CREEPS) {
+            return super.creeps;
+        } else if (type == FindTypes.FIND_STRUCTURES) {
+            return super.structures;
+        } else if (type == FindTypes.FIND_SOURCES) {
+            return super.sources;
+        }
         return null;
     }
 

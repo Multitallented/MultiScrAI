@@ -10,6 +10,7 @@ import org.stjs.javascript.annotation.GlobalScope;
  */
 @GlobalScope
 public class Constants {
+    public static final String USERNAME = "Multitallented";
 
     // Creep part costs
     public static final int MOVE_COST = 50;
