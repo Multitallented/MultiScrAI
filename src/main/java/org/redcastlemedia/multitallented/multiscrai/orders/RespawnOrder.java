@@ -20,7 +20,9 @@ public class RespawnOrder {
                            Map<String, Integer> structureTypes,
                            boolean hasConstruction,
                            RoomController roomController) {
-        if (creepTypes.$get(CreepType.UPGRADER.toString()) < 1 && roomController.getRoom().energyAvailable > 199) {
+
+        Integer upgraderCount = creepTypes.$get(CreepType.UPGRADER.toString());
+        if ((upgraderCount == null || upgraderCount < 1) && roomController.getRoom().energyAvailable > 199) {
             Array<PartTypes> body = new Array<>();
             body.push(PartTypes.WORK);
             body.push(PartTypes.CARRY);

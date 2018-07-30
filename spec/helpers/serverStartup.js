@@ -31,7 +31,7 @@ module.exports = {
 
     },
 
-    runServer: async function(server, callbacks, options) {
+    runServer: async function(server, callbacks, options, tickCallback, finalCallback) {
 
         try {
             await server.world.reset(); // reset world but add invaders and source keepers bots
@@ -57,6 +57,13 @@ module.exports = {
                 await server.tick();
                 _.each(await bot.newNotifications, ({ message }) => console.log('[notification]', message));
                 console.log('[memory]', await bot.memory, '\n');
+                if (tickCallback) {
+                    tickCallback(server.world);
+                }
+            }
+
+            if (finalCallback) {
+                finalCallback(server.world);
             }
         } catch (err) {
             // console.error(err);

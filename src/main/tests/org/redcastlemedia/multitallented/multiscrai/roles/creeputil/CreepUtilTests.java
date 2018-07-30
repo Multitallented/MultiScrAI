@@ -27,11 +27,6 @@ public class CreepUtilTests {
         assertEquals(CreepActionType.MOVE, creepAction.getAction());
     }
 
-    public class CreepMemoryAction {
-        public String targetId = "3n48cenwo";
-        public String action = "MOVE";
-    }
-
     @Test
     public void newCreepActionShouldNotThrowException() {
         CreepAction creepAction = new CreepAction(null);
