@@ -26,31 +26,31 @@ public class Creep extends ScreepsObject {
         memory = JSCollections.$map();
     }
 
-    public int harvest(Source source) {
+    public ResponseTypes harvest(Source source) {
         if (RoomPosition.distance(source.pos, pos) > 1) {
-            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+            return ResponseTypes.ERR_NOT_IN_RANGE;
         }
-        return ResponseTypes.OK.getCode();
+        return ResponseTypes.OK;
     }
 
-    public int moveTo(ScreepsObject target, Map<String, ?> opts) {
+    public ResponseTypes moveTo(ScreepsObject target, Map<String, ?> opts) {
         if (fatigue > 0) {
-            return ResponseTypes.ERR_TIRED.getCode();
+            return ResponseTypes.ERR_TIRED;
         }
         pos.x = pos.x > target.pos.x && pos.x > 0 ? pos.x - 1 :
                 pos.x < target.pos.x && pos.x < 49 ? pos.x + 1 : pos.x;
         pos.y = pos.y > target.pos.y && pos.y > 0 ? pos.y - 1 :
                 pos.y < target.pos.y && pos.y < 49 ? pos.y + 1: pos.y;
-        return ResponseTypes.OK.getCode();
+        return ResponseTypes.OK;
     }
 
-    public int transfer(ScreepsObject target, int type) {
+    public ResponseTypes transfer(ScreepsObject target, int type) {
         return transfer(target, type, Math.min(carry.energy, carryCapacity));
     }
 
-    public int transfer(ScreepsObject target, int type, int amount) {
+    public ResponseTypes transfer(ScreepsObject target, int type, int amount) {
         if (RoomPosition.distance(target.pos, pos) > 1) {
-            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+            return ResponseTypes.ERR_NOT_IN_RANGE;
         }
         if (target instanceof DepositableStructure) {
             DepositableStructure depo = (DepositableStructure) target;
@@ -73,14 +73,14 @@ public class Creep extends ScreepsObject {
                 depo.store.energy = depo.storageCapacity;
             }
         } else {
-            return ResponseTypes.ERR_INVALID_TARGET.getCode();
+            return ResponseTypes.ERR_INVALID_TARGET;
         }
-        return ResponseTypes.OK.getCode();
+        return ResponseTypes.OK;
     }
 
-    public int pickup(Energy energy) {
+    public ResponseTypes pickup(Energy energy) {
         if (RoomPosition.distance(energy.pos, pos) > 1) {
-            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+            return ResponseTypes.ERR_NOT_IN_RANGE;
         }
         if (carryCapacity > energy.energy + carry.energy) {
             carry.energy = carry.energy + energy.energy;
@@ -89,27 +89,27 @@ public class Creep extends ScreepsObject {
             energy.energy -= carryCapacity - carry.energy;
             carry.energy = carryCapacity;
         }
-        return ResponseTypes.OK.getCode();
+        return ResponseTypes.OK;
     }
 
-    public int upgradeController(Controller controller) {
+    public ResponseTypes upgradeController(Controller controller) {
         if (RoomPosition.distance(controller.pos, pos) > 1) {
-            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+            return ResponseTypes.ERR_NOT_IN_RANGE;
         }
-        return ResponseTypes.OK.getCode();
+        return ResponseTypes.OK;
     }
 
-    public int build(ConstructionSite buildable) {
+    public ResponseTypes build(ConstructionSite buildable) {
         if (RoomPosition.distance(buildable.pos, pos) > 3) {
-            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+            return ResponseTypes.ERR_NOT_IN_RANGE;
         }
-        return ResponseTypes.OK.getCode();
+        return ResponseTypes.OK;
     }
 
-    public int repair(Structure buildable) {
+    public ResponseTypes repair(Structure buildable) {
         if (RoomPosition.distance(buildable.pos, pos) > 1) {
-            return ResponseTypes.ERR_NOT_IN_RANGE.getCode();
+            return ResponseTypes.ERR_NOT_IN_RANGE;
         }
-        return ResponseTypes.OK.getCode();
+        return ResponseTypes.OK;
     }
 }

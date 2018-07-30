@@ -4,6 +4,7 @@ import org.redcastlemedia.multitallented.multiscrai.controllers.RoomController;
 import org.redcastlemedia.multitallented.multiscrai.roles.CreepRole;
 import org.redcastlemedia.multitallented.multiscrai.roles.Upgrader;
 import org.redcastlemedia.multitallented.screeps.Creep;
+import org.redcastlemedia.multitallented.screeps.global.console;
 
 /**
  * var RoomController = require('RoomController');
@@ -13,6 +14,7 @@ import org.redcastlemedia.multitallented.screeps.Creep;
 public class CreepUtil {
 
     public CreepRole getCreepRole(Creep creep, RoomController roomController) {
+        console.log("Role: " + (creep.memory == null));
         switch (getRoleString(creep)) {
             case UPGRADER:
                 return new Upgrader(creep);

@@ -19,7 +19,7 @@ module.exports = {
         await server.world.addRoomObject('W0N1', 'mineral', 40, 40, { mineralType: 'H', density: 3, mineralAmount: 3000 });
         _.forEach(options.creeps, (creep) => {
             server.world.addRoomObject('W0N1', 'creep', creep.pos.x, creep.pos.y, creep);
-        })
+        });
     },
     terrainEdgy: function(server, options) {
 

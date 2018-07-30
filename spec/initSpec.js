@@ -15,7 +15,7 @@ describe("Screeps Server Tests", function() {
 
     it("Empty upgrader should start harvesting", async function() {
         let creeps = [
-            { memory: { role: 'upgrader' }, carry: { energy: 0 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
+            { name: "Upgrader124", memory: { role: 'UPGRADER', action: { action: "UPGRADE_CONTROLLER", targetId: "control"} }, carry: { energy: 0 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
         ];
 
         await serverStart.runServer(server, [ serverStart.terrainNormal ],
@@ -27,7 +27,7 @@ describe("Screeps Server Tests", function() {
             if (obj.type === 'source') {
                 sourceId = obj._id;
             }
-            if (obj.memory && obj.memory.role === 'upgrader') {
+            if (obj.memory && obj.memory.role === 'UPGRADER') {
                 upgrader = obj;
             }
         });
@@ -39,7 +39,7 @@ describe("Screeps Server Tests", function() {
 
     it("Full upgrader should start upgrading", async function() {
         let creeps = [
-            { memory: { role: 'upgrader' }, carry: { energy: 300 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
+            { name: "Upgrader1253", memory: { role: 'UPGRADER', action: { action: "HARVEST" } }, carry: { energy: 300 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
         ];
 
         await serverStart.runServer(server, [ serverStart.terrainNormal ],
@@ -51,7 +51,7 @@ describe("Screeps Server Tests", function() {
             if (obj.type === 'controller') {
                 controllerId = obj._id;
             }
-            if (obj.memory && obj.memory.role === 'upgrader') {
+            if (obj.memory && obj.memory.role === 'UPGRADER') {
                 upgrader = obj;
             }
         });

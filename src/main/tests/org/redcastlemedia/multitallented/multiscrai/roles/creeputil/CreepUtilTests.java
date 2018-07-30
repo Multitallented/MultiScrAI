@@ -24,7 +24,7 @@ public class CreepUtilTests {
     public void creepActionShouldParseMemoryObject() {
         CreepAction creepAction = new CreepAction(JSCollections.$map("targetId", (Object) "3n48cenwo", "action", "MOVE"));
         assertEquals("3n48cenwo", creepAction.getTargetId());
-        assertEquals(CreepAction.ActionType.MOVE, creepAction.getAction());
+        assertEquals(CreepActionType.MOVE, creepAction.getAction());
     }
 
     public class CreepMemoryAction {
@@ -42,7 +42,7 @@ public class CreepUtilTests {
     @Test
     public void creepShouldHaveUpgraderRole() {
         Creep creep = new Creep();
-        creep.memory.$put("role", "upgrader");
+        creep.memory.$put("role", "UPGRADER");
         CreepUtil creepUtil = new CreepUtil();
         CreepRole creepRole = creepUtil.getCreepRole(creep, roomController);
         assertTrue(creepRole instanceof Upgrader);

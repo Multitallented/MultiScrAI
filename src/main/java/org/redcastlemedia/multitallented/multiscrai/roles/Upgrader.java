@@ -5,6 +5,8 @@ import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepAction;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepActionType;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepType;
 import org.redcastlemedia.multitallented.screeps.Creep;
+import org.stjs.javascript.JSCollections;
+import org.stjs.javascript.Map;
 
 /**
  * var RoomController = require('RoomController');
@@ -24,6 +26,5 @@ public class Upgrader extends CreepRole {
         } else {
             this.action.setAction(CreepActionType.UPGRADE_CONTROLLER);
         }
-        getCreep().memory.$put(CreepAction.KEY, super.action);
     }
 }

@@ -53,20 +53,26 @@ public abstract class CreepRole {
         switch (action.getAction()) {
             case UPGRADE_CONTROLLER:
                 Controller controller = roomController.getRoom().controller;
-                if (creep.upgradeController(controller) == ResponseTypes.ERR_NOT_IN_RANGE.getCode()) {
-                    creep.moveTo(controller, JSCollections.$map());
+                if (creep.upgradeController(controller) == ResponseTypes.ERR_NOT_IN_RANGE) {
+                    creep.moveTo(controller, JSCollections.$map("visualizePathStyle", JSCollections.$map("stroke", "#ffffff")));
                 }
+                action.setTargetId(controller.id);
                 break;
             case HARVEST:
                 Source source = roomController.getAvailableHarvest(creep.pos, true);
                 if (source == null) {
                     break;
                 }
-                if (creep.harvest(source) == ResponseTypes.ERR_NOT_IN_RANGE.getCode()) {
-                    creep.moveTo(source, JSCollections.$map());
+                if (creep.harvest(source) == ResponseTypes.ERR_NOT_IN_RANGE) {
+                    creep.moveTo(source, JSCollections.$map("visualizePathStyle", JSCollections.$map("stroke", "#ffffff")));
                 }
+                action.setTargetId(source.id);
                 break;
         }
+
+        Map<String, String> actionMap = JSCollections.$map("action", action.getAction().toString(),
+                "targetId", action.getTargetId());
+        getCreep().memory.$put(CreepAction.KEY, actionMap);
     }
 
     public abstract void determineAction(RoomController roomController);

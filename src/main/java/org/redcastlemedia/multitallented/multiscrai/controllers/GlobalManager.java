@@ -1,6 +1,8 @@
 package org.redcastlemedia.multitallented.multiscrai.controllers;
 
 import org.redcastlemedia.multitallented.helpers.Lodash;
+import org.redcastlemedia.multitallented.helpers.LodashCallback;
+import org.redcastlemedia.multitallented.helpers.LodashCallback1;
 import org.redcastlemedia.multitallented.helpers.LodashCallback2;
 import org.redcastlemedia.multitallented.screeps.Game;
 import org.redcastlemedia.multitallented.screeps.Room;
@@ -22,8 +24,7 @@ public class GlobalManager {
 
         Lodash.forIn(Game.rooms, new LodashCallback2<Room, String>() {
             @Override
-            public boolean invoke(Room room, String name) {
-                // Create a room controller
+            public boolean invoke(Room room, String roomName) {
                 roomControllers.push(new RoomController(room));
                 return true;
             }

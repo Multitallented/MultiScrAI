@@ -20,5 +20,5 @@ public abstract class Spawn extends DepositableStructure {
 
     public abstract ResponseTypes canCreateCreep(Array<PartTypes> abilities, String name);
 
-    public abstract ResponseTypes createCreep(Array<PartTypes> abilities, String name, Map<String, Object> memory);
+    public abstract ResponseTypes spawnCreep(Array<PartTypes> abilities, String name, Map<String, Object> memory);
 }

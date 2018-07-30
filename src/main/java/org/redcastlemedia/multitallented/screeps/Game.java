@@ -11,14 +11,14 @@ import org.stjs.javascript.annotation.STJSBridge;
  */
 @STJSBridge
 public class Game {
-    public static Array<Room> rooms;
+    public static Map<String, Room> rooms;
     public static int time;
-    public static Array<Creep> creeps;
+    public static Map<String, Creep> creeps;
     public static Map<String, Spawn> spawns;
 
     static {
-        rooms = new Array<>();
-        creeps = new Array<>();
+        rooms = JSCollections.$map();
+        creeps = JSCollections.$map();
         spawns = JSCollections.$map();
         time = (int) (Math.floor(Math.random() * 100000) + 100000);
     }

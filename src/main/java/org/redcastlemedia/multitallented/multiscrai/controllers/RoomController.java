@@ -10,6 +10,8 @@ import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepUtil;
 import org.redcastlemedia.multitallented.screeps.*;
 import org.redcastlemedia.multitallented.screeps.global.FindTypes;
 import org.redcastlemedia.multitallented.screeps.global.StructureTypes;
+import org.redcastlemedia.multitallented.screeps.global.console;
+import org.redcastlemedia.multitallented.screeps.structures.Spawn;
 import org.redcastlemedia.multitallented.screeps.structures.Structure;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.JSCollections;
@@ -67,6 +69,7 @@ public class RoomController {
                 CreepRole creepRole = creepUtil.getCreepRole(creep, roomController);
 
                 if (creepRole != null && creepRole.getType() != null) {
+                    console.log("hi");
                     String type = creepRole.getType().toString();
                     if (creepTypes.$get(type) != null) {
                         creepTypes.$put(type, creepTypes.$get(type) + 1);
@@ -75,7 +78,7 @@ public class RoomController {
                     }
                     creepRole.run(roomController);
                 }
-                return false;
+                return true;
             }
         }, roomController);
 
@@ -85,7 +88,7 @@ public class RoomController {
         //TODO roomBuilder?
 
         Map<String, Integer> structureTypes = JSCollections.$map();
-        StructureRole spawn = null;
+        Spawn spawn = null;
         for (int i = 0; i < structures.$length(); i++) {
             Structure structure = structures.$get(i);
             StructureRole structureRole = new StructureRole(structure);
@@ -99,7 +102,7 @@ public class RoomController {
             }
 
             if (structure.structureType == StructureTypes.STRUCTURE_SPAWN) {
-                spawn = new StructureRole(structure);
+                spawn = (Spawn) structure;
             }
         }
 

@@ -1,5 +1,7 @@
 package org.redcastlemedia.multitallented.screeps;
 
+import org.redcastlemedia.multitallented.helpers.Lodash;
+import org.redcastlemedia.multitallented.helpers.LodashCallback1;
 import org.redcastlemedia.multitallented.screeps.global.*;
 import org.redcastlemedia.multitallented.screeps.helpers.Targetable;
 import org.stjs.javascript.Array;
@@ -59,7 +61,7 @@ public class RoomPosition extends Targetable {
      * @return response
      */
     public ScreepsObject findClosestByRange(FindTypes type, Map<String, Object> options) {
-        Room room = Game.rooms.$get(0);
+        Room room = Game.rooms.$get(roomName);
         Array<? extends ScreepsObject> findResults = room.find(type, options);
         if (findResults.$length() > 0)
             return findResults.$get(0);
