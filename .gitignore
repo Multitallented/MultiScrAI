@@ -8,6 +8,7 @@
 /Gruntfile.js
 /package-lock.json
 /server
+/spec/server
 
 #
 # Mac OSX

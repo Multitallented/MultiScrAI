@@ -20,6 +20,9 @@ module.exports = {
         _.forEach(options.creeps, (creep) => {
             server.world.addRoomObject('W0N1', 'creep', creep.pos.x, creep.pos.y, creep);
         });
+        _.forEach(options.structures, (structure) => {
+            server.world.addRoomObject('W0N1', 'structure', structure.pos.x, structure.pos.y, structure);
+        });
     },
     terrainEdgy: function(server, options) {
 

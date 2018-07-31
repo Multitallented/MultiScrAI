@@ -39,8 +39,6 @@ describe("Screeps Server Tests", function() {
                 expect(upgrader.memory.action.targetId).toBe(sourceId);
             });
 
-
-
     });
 
     it("Full upgrader should start upgrading", async function() {
