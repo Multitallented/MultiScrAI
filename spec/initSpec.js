@@ -18,28 +18,29 @@ describe("Screeps Server Tests", function() {
             { name: "Upgrader124", memory: { role: 'UPGRADER', action: { action: "UPGRADE_CONTROLLER", targetId: "control"} }, carry: { energy: 0 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
         ];
 
-        let upgrader = null;
-        let sourceId = null;
 
         await serverStart.runServer(server, [ serverStart.terrainNormal ],
-            {controllerLevel: 1, creeps: creeps, ticks: 1 }, null, (world) => {
-                _.forEach(world.roomObjects('W0N1'), (obj) => {
+            {controllerLevel: 1, creeps: creeps, ticks: 1 }, null, async (world) => {
+
+                let upgrader = null;
+                let sourceId = null;
+                let roomObjects = await world.roomObjects('W0N1');
+                _.forEach(roomObjects, (obj) => {
                     if (obj.type === 'source') {
-                        console.log("source found");
                         sourceId = obj._id;
                     }
                     if (obj.memory && obj.memory.role === 'UPGRADER') {
-                        console.log("upgrader found");
                         upgrader = obj;
                     }
                 });
+                if (upgrader == null || sourceId == null) {
+                    fail();
+                }
+                expect(upgrader.memory.action.targetId).toBe(sourceId);
             });
 
 
-        if (upgrader == null || sourceId == null) {
-            fail();
-        }
-        expect(upgrader.memory.action.targetId).toBe(sourceId);
+
     });
 
     it("Full upgrader should start upgrading", async function() {
@@ -47,28 +48,25 @@ describe("Screeps Server Tests", function() {
             { name: "Upgrader1253", memory: { role: 'UPGRADER', action: { action: "HARVEST" } }, carry: { energy: 300 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
         ];
 
-        let upgrader = null;
-        let controllerId = null;
 
         await serverStart.runServer(server, [ serverStart.terrainNormal ],
             {controllerLevel: 1, creeps: creeps, ticks: 1 }, async (world) => {
+                let upgrader = null;
+                let controllerId = null;
                 let roomObjects = await world.roomObjects('W0N1');
                 _.forEach(roomObjects, null, (obj) => {
                     if (obj.type === 'controller') {
-                        console.log("controller found");
                         controllerId = obj._id;
                     }
                     if (obj.memory && obj.memory.role === 'UPGRADER') {
-                        console.log("upgrader found");
                         upgrader = obj;
                     }
                 });
+
+                if (upgrader == null || controllerId == null) {
+                    fail();
+                }
+                expect(upgrader.memory.action.targetId).toBe(controllerId);
             });
-
-
-        if (upgrader == null || controllerId == null) {
-            fail();
-        }
-        expect(upgrader.memory.action.targetId).toBe(controllerId);
     });
 });
