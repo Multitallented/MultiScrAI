@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.redcastlemedia.multitallented.multiscrai.controllers.RoomController;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepAction;
+import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepActionType;
 import org.redcastlemedia.multitallented.multiscrai.screeps.RoomImpl;
 import org.redcastlemedia.multitallented.screeps.*;
 import org.stjs.javascript.JSCollections;
@@ -23,7 +24,7 @@ public class RoleTests {
         this.source = new Source();
         source.pos = new RoomPosition(10, 10, "W10N10");
         room1.sources.push(source);
-        Game.rooms.$set(0,room1);
+        Game.rooms.$put(room1.name,room1);
         this.roomController = new RoomController(room1);
         Creep creep = createUpgrader(0);
         this.upgrader = new Upgrader(creep);
@@ -32,14 +33,14 @@ public class RoleTests {
     @Test
     public void upgraderHarvest() {
         this.upgrader.determineAction(roomController);
-        assertEquals(CreepAction.ActionType.HARVEST, this.upgrader.action.getAction());
+        assertEquals(CreepActionType.HARVEST, this.upgrader.action.getAction());
     }
 
     @Test
     public void upgraderUpgrades() {
         this.upgrader = new Upgrader(createUpgrader(300));
         this.upgrader.determineAction(roomController);
-        assertEquals(CreepAction.ActionType.UPGRADE_CONTROLLER, this.upgrader.action.getAction());
+        assertEquals(CreepActionType.UPGRADE_CONTROLLER, this.upgrader.action.getAction());
     }
 
     @Test
@@ -61,9 +62,9 @@ public class RoleTests {
     @Test
     public void upgraderShouldntStopUpgradingUntilEmpty() {
         this.upgrader = new Upgrader(createUpgrader(4));
-        this.upgrader.action.setAction(CreepAction.ActionType.UPGRADE_CONTROLLER);
+        this.upgrader.action.setAction(CreepActionType.UPGRADE_CONTROLLER);
         this.upgrader.determineAction(roomController);
-        assertEquals(CreepAction.ActionType.UPGRADE_CONTROLLER,this.upgrader.action.getAction());
+        assertEquals(CreepActionType.UPGRADE_CONTROLLER,this.upgrader.action.getAction());
     }
 
     private Creep createUpgrader(int energy) {

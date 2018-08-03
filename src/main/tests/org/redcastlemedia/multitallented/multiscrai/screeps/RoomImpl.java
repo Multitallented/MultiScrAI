@@ -1,9 +1,7 @@
 package org.redcastlemedia.multitallented.multiscrai.screeps;
 
-import org.redcastlemedia.multitallented.screeps.Creep;
 import org.redcastlemedia.multitallented.screeps.Room;
 import org.redcastlemedia.multitallented.screeps.RoomPosition;
-import org.redcastlemedia.multitallented.screeps.Source;
 import org.redcastlemedia.multitallented.screeps.global.*;
 import org.redcastlemedia.multitallented.screeps.helpers.Targetable;
 import org.stjs.javascript.Array;

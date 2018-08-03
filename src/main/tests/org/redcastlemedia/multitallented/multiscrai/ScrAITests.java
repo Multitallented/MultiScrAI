@@ -13,8 +13,7 @@ public class ScrAITests {
 
     @Before
     public void setup() {
-        Game.rooms = new Array<>();
-        Game.rooms.push(new RoomImpl("Room1", JSCollections.$map()));
+        Game.rooms.$put("Room1", new RoomImpl("Room1", JSCollections.$map()));
     }
 
     @Test
