@@ -34,6 +34,9 @@ public class CreepUtil {
             return null;
         }
         String role = (String) creep.memory.$get("role");
+        if (role == null) {
+            return null;
+        }
         return CreepType.valueOf(role.toUpperCase());
     }
 }

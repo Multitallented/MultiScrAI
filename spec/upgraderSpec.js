@@ -1,7 +1,7 @@
 const serverStart = require('./helpers/serverStartup');
 const _ = require('lodash');
 
-describe("Screeps Server Tests", function() {
+describe("Upgrader Tests", function() {
     let server = undefined;
 
     beforeEach(function () {
@@ -15,7 +15,7 @@ describe("Screeps Server Tests", function() {
 
     it("Empty upgrader should start harvesting", async function() {
         let creeps = [
-            { name: "Upgrader124", memory: { role: 'UPGRADER', action: { action: "UPGRADE_CONTROLLER", targetId: "control"} }, carry: { energy: 0 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
+            { name: "Upgrader124", memory: { role: 'UPGRADER', action: { action: "UPGRADE_CONTROLLER", targetId: "control"} }, carry: { energy: 0 }, carryCapacity: 300, pos: { x: 25, y: 40 } }
         ];
 
 
@@ -37,6 +37,7 @@ describe("Screeps Server Tests", function() {
                     fail();
                 }
                 expect(upgrader.memory.action.targetId).toBe(sourceId);
+                expect(upgrader.memory.action.action).toBe("HARVEST");
             });
 
     });

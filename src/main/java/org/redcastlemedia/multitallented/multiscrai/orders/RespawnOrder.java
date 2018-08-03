@@ -27,7 +27,12 @@ public class RespawnOrder {
             body.push(PartTypes.WORK);
             body.push(PartTypes.CARRY);
             body.push(PartTypes.MOVE);
-            spawn.spawnCreep(body,CreepType.UPGRADER.toString() + Game.time,JSCollections.$map("role", (Object) CreepType.UPGRADER.toString()));
+
+            Map<String, String> memory = JSCollections.$map("role", CreepType.UPGRADER.toString());
+
+            Map<String, Object> options = JSCollections.$map("memory", (Object) memory);
+
+            spawn.spawnCreep(body,CreepType.UPGRADER.toString() + Game.time, options);
         }
     }
 }

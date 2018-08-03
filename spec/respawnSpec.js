@@ -1,7 +1,7 @@
 const serverStart = require('./helpers/serverStartup');
 const _ = require('lodash');
 
-describe("Screeps Server Tests", function() {
+describe("Respawn Tests", function() {
     let server = undefined;
 
     beforeEach(function () {
@@ -13,7 +13,7 @@ describe("Screeps Server Tests", function() {
         server.stop();
     });
 
-    it("Empty upgrader should start harvesting", async function() {
+    it("Spawner should spawn upgrader", async function() {
         let structures = [
             { name: "Spawn1", stuctureType: "spawn", pos: { x: 25, y: 25 } }
         ];
@@ -32,12 +32,12 @@ describe("Screeps Server Tests", function() {
                 if (spawner == null) {
                     fail();
                 }
-                expect(spawner.spawning).not.toBe(null);
+                expect(spawner.spawning.memory.role).toBe("UPGRADER");
             });
 
     });
 
-    it("Full upgrader should start upgrading", async function() {
+    it("Spawner should not spawn second upgrader", async function() {
         let creeps = [
             { name: "Upgrader1253", memory: { role: 'UPGRADER', action: { action: "HARVEST" } },
                 carry: { energy: 300 }, carryCapacity: 300, pos: { x: 15, y: 40 } }
