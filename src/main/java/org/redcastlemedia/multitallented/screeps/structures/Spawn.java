@@ -12,13 +12,30 @@ import org.stjs.javascript.annotation.STJSBridge;
  * Created by nick on 26/07/15.
  */
 @STJSBridge
-public abstract class Spawn extends DepositableStructure {
+public class Spawn extends DepositableStructure {
 
     public SpawningCreep spawning;
     public String name;
     public Map<String, Object> memory;
 
-    public abstract ResponseTypes canCreateCreep(Array<PartTypes> abilities, String name);
+    public ResponseTypes canCreateCreep(Array<PartTypes> abilities, String name) {
+        return ResponseTypes.OK;
+    }
 
-    public abstract ResponseTypes spawnCreep(Array<PartTypes> abilities, String name, Map<String, Object> memory);
+    public ResponseTypes spawnCreep(Array<PartTypes> abilities, String name, Map<String, Object> memory) {
+        this.spawning = new SpawningCreep();
+        this.spawning.name = name;
+        this.spawning.memory = memory;
+        return ResponseTypes.OK;
+    }
+
+    @Override
+    public int destroy() {
+        return 0;
+    }
+
+    @Override
+    public int notifyWhenAttacked(boolean enabled) {
+        return 0;
+    }
 }
