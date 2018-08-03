@@ -32,6 +32,14 @@ public class RoleTests {
 
     @Test
     public void upgraderHarvest() {
+        this.upgrader.action.setAction(CreepActionType.UPGRADE_CONTROLLER);
+        this.upgrader.determineAction(roomController);
+        assertEquals(CreepActionType.HARVEST, this.upgrader.action.getAction());
+    }
+
+    @Test
+    public void upgraderShouldHarvestUntilFull() {
+        this.upgrader = new Upgrader(createUpgrader(2));
         this.upgrader.determineAction(roomController);
         assertEquals(CreepActionType.HARVEST, this.upgrader.action.getAction());
     }

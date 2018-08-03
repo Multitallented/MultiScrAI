@@ -20,11 +20,24 @@ public class Upgrader extends CreepRole {
     }
 
     public void determineAction(RoomController roomController) {
-        if (getCreep().carry.energy < getCreep().carryCapacity && (this.action.getAction() == null ||
-                !this.action.getAction().equals(CreepActionType.UPGRADE_CONTROLLER))) {
-            this.action.setAction(CreepActionType.HARVEST);
-        } else {
-            this.action.setAction(CreepActionType.UPGRADE_CONTROLLER);
+        boolean nullAction = this.action.getAction() == null;
+
+        if (nullAction) {
+            if (getCreep().carry.energy > getCreep().carryCapacity/2) {
+                this.action.setAction(CreepActionType.UPGRADE_CONTROLLER);
+            }
+            else {
+                this.action.setAction(CreepActionType.HARVEST);
+            }
         }
+        else {
+            if (getCreep().carry.energy == 0) {
+                this.action.setAction(CreepActionType.HARVEST);
+            }
+            else if (getCreep().carry.energy == getCreep().carryCapacity){
+                this.action.setAction(CreepActionType.UPGRADE_CONTROLLER);
+            }
+        }
+
     }
 }
