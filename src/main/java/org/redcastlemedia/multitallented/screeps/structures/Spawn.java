@@ -22,10 +22,10 @@ public class Spawn extends DepositableStructure {
         return ResponseTypes.OK;
     }
 
-    public ResponseTypes spawnCreep(Array<PartTypes> abilities, String name, Map<String, Object> memory) {
+    public ResponseTypes spawnCreep(Array<PartTypes> abilities, String name, Map<String, Object> options) {
         this.spawning = new SpawningCreep();
         this.spawning.name = name;
-        this.spawning.memory = memory;
+        this.spawning.memory = (Map<String, Object>) options.$get("memory");
         return ResponseTypes.OK;
     }
 
