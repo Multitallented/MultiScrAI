@@ -69,7 +69,6 @@ public class RoomController {
                 CreepRole creepRole = creepUtil.getCreepRole(creep, roomController);
 
                 if (creepRole != null && creepRole.getType() != null) {
-                    console.log("hi");
                     String type = creepRole.getType().toString();
                     if (creepTypes.$get(type) != null) {
                         creepTypes.$put(type, creepTypes.$get(type) + 1);

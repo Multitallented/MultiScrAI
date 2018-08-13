@@ -14,7 +14,6 @@ import org.redcastlemedia.multitallented.screeps.global.console;
 public class CreepUtil {
 
     public CreepRole getCreepRole(Creep creep, RoomController roomController) {
-        console.log("Role: " + (creep.memory == null));
         switch (getRoleString(creep)) {
             case UPGRADER:
                 return new Upgrader(creep);

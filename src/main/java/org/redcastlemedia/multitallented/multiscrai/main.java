@@ -13,6 +13,6 @@ import org.redcastlemedia.multitallented.screeps.global.console;
 public class main {
     public static void main(String[] args) {
         new GlobalManager();
-        console.log("Tick Finished, used CPU: " + Game.cpu.getUsed());
+//        console.log("Tick Finished, used CPU: " + Game.cpu.getUsed());
     }
 }
