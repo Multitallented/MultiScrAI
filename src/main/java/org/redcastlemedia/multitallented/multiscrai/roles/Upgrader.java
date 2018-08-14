@@ -8,11 +8,6 @@ import org.redcastlemedia.multitallented.screeps.Creep;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
 
-/**
- * var RoomController = require('RoomController');
- * var CreepAction = require('CreepAction');
- * var CreepUtil = require('CreepUtil');
- */
 public class Upgrader extends CreepRole {
 
     public Upgrader(Creep creep) {

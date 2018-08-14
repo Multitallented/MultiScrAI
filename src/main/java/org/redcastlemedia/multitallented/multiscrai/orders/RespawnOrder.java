@@ -11,9 +11,6 @@ import org.stjs.javascript.Array;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
 
-/**
- * var RoomController = require('RoomController');
- */
 public class RespawnOrder {
     public static void run(Map<String, Integer> creepTypes,
                            Spawn spawn,

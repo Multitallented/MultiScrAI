@@ -17,14 +17,6 @@ import org.stjs.javascript.Array;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
 
-/**
- * var CreepUtil = require('CreepUtil');
- * var Lodash = require('lodash');
- * var HarvestOrder = require('HarvestOrder');
- * var RespawnOrder = require('RespawnOrder');
- * var CreepRole = require('CreepRole');
- * var StructureRole = require('StructureRole');
- */
 public class RoomController {
 
     private final RoomController roomController;
