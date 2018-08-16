@@ -1,12 +1,15 @@
 package org.redcastlemedia.multitallented.multiscrai.roles;
 
+import org.redcastlemedia.multitallented.multiscrai.Constants;
 import org.redcastlemedia.multitallented.multiscrai.controllers.RoomController;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepAction;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepType;
 import org.redcastlemedia.multitallented.screeps.Creep;
+import org.redcastlemedia.multitallented.screeps.Game;
 import org.redcastlemedia.multitallented.screeps.Room;
 import org.redcastlemedia.multitallented.screeps.Source;
 import org.redcastlemedia.multitallented.screeps.global.ResponseTypes;
+import org.redcastlemedia.multitallented.screeps.global.ScreepsObject;
 import org.redcastlemedia.multitallented.screeps.structures.Controller;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
@@ -62,6 +65,18 @@ public abstract class CreepRole {
                     creep.moveTo(source, JSCollections.$map("visualizePathStyle", JSCollections.$map("stroke", "#ffffff")));
                 }
                 action.setTargetId(source.id);
+                break;
+            case DEPOSIT_ENERGY:
+                String id = roomController.getAvailableDepositEnergy(creep.pos);
+
+                if (id == null) {
+                    break;
+                }
+                ScreepsObject screepsObject = Game.getObjectById(id);
+                if (creep.transfer(screepsObject, Constants.RESOURCE_ENERGY) == ResponseTypes.ERR_NOT_IN_RANGE) {
+                    creep.moveTo(screepsObject, JSCollections.$map("visualizePathStyle", JSCollections.$map("stroke", "#ffffff")));
+                }
+                action.setTargetId(id);
                 break;
         }
 

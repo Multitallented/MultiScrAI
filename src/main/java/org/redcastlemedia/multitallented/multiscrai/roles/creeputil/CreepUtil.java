@@ -2,6 +2,7 @@ package org.redcastlemedia.multitallented.multiscrai.roles.creeputil;
 
 import org.redcastlemedia.multitallented.multiscrai.controllers.RoomController;
 import org.redcastlemedia.multitallented.multiscrai.roles.CreepRole;
+import org.redcastlemedia.multitallented.multiscrai.roles.Harvester;
 import org.redcastlemedia.multitallented.multiscrai.roles.Upgrader;
 import org.redcastlemedia.multitallented.screeps.Creep;
 import org.redcastlemedia.multitallented.screeps.global.console;
@@ -12,6 +13,8 @@ public class CreepUtil {
         switch (getRoleString(creep)) {
             case UPGRADER:
                 return new Upgrader(creep);
+            case HARVESTER:
+                return new Harvester(creep);
             default:
                 return null;
         }
@@ -20,6 +23,8 @@ public class CreepUtil {
     public void runByRole(Creep creep, RoomController roomController) {
         if (getRoleString(creep).equals(CreepType.UPGRADER)) {
             new Upgrader(creep).run(roomController);
+        } else if (getRoleString(creep).equals(CreepType.HARVESTER)) {
+            new Harvester(creep).run(roomController);
         }
     }
 

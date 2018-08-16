@@ -12,7 +12,7 @@ import org.stjs.javascript.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class RoleTests {
+public class UpgraderTests {
     private Upgrader upgrader;
     private RoomController roomController;
     private RoomImpl room1;
@@ -26,7 +26,7 @@ public class RoleTests {
         room1.sources.push(source);
         Game.rooms.$put(room1.name,room1);
         this.roomController = new RoomController(room1);
-        Creep creep = createUpgrader(0);
+        Creep creep = createCreep(0);
         this.upgrader = new Upgrader(creep);
     }
 
@@ -39,21 +39,21 @@ public class RoleTests {
 
     @Test
     public void upgraderShouldHarvestUntilFull() {
-        this.upgrader = new Upgrader(createUpgrader(2));
+        this.upgrader = new Upgrader(createCreep(2));
         this.upgrader.determineAction(roomController);
         assertEquals(CreepActionType.HARVEST, this.upgrader.action.getAction());
     }
 
     @Test
     public void upgraderUpgrades() {
-        this.upgrader = new Upgrader(createUpgrader(300));
+        this.upgrader = new Upgrader(createCreep(300));
         this.upgrader.determineAction(roomController);
         assertEquals(CreepActionType.UPGRADE_CONTROLLER, this.upgrader.action.getAction());
     }
 
     @Test
     public void upgraderShouldMoveTowardsSource() {
-        this.upgrader = new Upgrader(createUpgrader(0));
+        this.upgrader = new Upgrader(createCreep(0));
         this.upgrader.run(roomController);
         assertEquals(24, this.upgrader.getCreep().pos.x);
         assertEquals(24, this.upgrader.getCreep().pos.y);
@@ -61,7 +61,7 @@ public class RoleTests {
 
     @Test
     public void upgraderShouldMoveTowardsController() {
-        this.upgrader = new Upgrader(createUpgrader(300));
+        this.upgrader = new Upgrader(createCreep(300));
         this.upgrader.run(roomController);
         assertEquals(26, this.upgrader.getCreep().pos.x);
         assertEquals(26, this.upgrader.getCreep().pos.y);
@@ -69,13 +69,13 @@ public class RoleTests {
 
     @Test
     public void upgraderShouldntStopUpgradingUntilEmpty() {
-        this.upgrader = new Upgrader(createUpgrader(4));
+        this.upgrader = new Upgrader(createCreep(4));
         this.upgrader.action.setAction(CreepActionType.UPGRADE_CONTROLLER);
         this.upgrader.determineAction(roomController);
         assertEquals(CreepActionType.UPGRADE_CONTROLLER,this.upgrader.action.getAction());
     }
 
-    private Creep createUpgrader(int energy) {
+    public static Creep createCreep(int energy) {
         Creep creep = new Creep();
         Map<String, Object> memory = JSCollections.$map("memory", (Object) new CreepAction(null));
         creep.memory = memory;

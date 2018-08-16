@@ -1,11 +1,10 @@
 package org.redcastlemedia.multitallented.multiscrai.roles;
 
-import org.redcastlemedia.multitallented.screeps.global.StructureTypes;
 import org.redcastlemedia.multitallented.screeps.structures.Structure;
 
 public class StructureRole {
     private final Structure structure;
-    private final StructureTypes type;
+    private final String type;
 
     public StructureRole(Structure structure) {
         this.structure = structure;
@@ -16,7 +15,7 @@ public class StructureRole {
         return structure;
     }
 
-    public StructureTypes getType() {
+    public String getType() {
         return type;
     }
 }

@@ -44,11 +44,11 @@ public class Creep extends ScreepsObject {
         return ResponseTypes.OK;
     }
 
-    public ResponseTypes transfer(ScreepsObject target, int type) {
+    public ResponseTypes transfer(ScreepsObject target, String type) {
         return transfer(target, type, Math.min(carry.energy, carryCapacity));
     }
 
-    public ResponseTypes transfer(ScreepsObject target, int type, int amount) {
+    public ResponseTypes transfer(ScreepsObject target, String type, int amount) {
         if (RoomPosition.distance(target.pos, pos) > 1) {
             return ResponseTypes.ERR_NOT_IN_RANGE;
         }

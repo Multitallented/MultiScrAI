@@ -1,6 +1,5 @@
 package org.redcastlemedia.multitallented.screeps.structures;
 
-import org.redcastlemedia.multitallented.screeps.global.StructureTypes;
 import org.redcastlemedia.multitallented.screeps.helpers.OwnerProperties;
 import org.redcastlemedia.multitallented.screeps.global.ScreepsObject;
 import org.stjs.javascript.annotation.STJSBridge;
@@ -10,7 +9,7 @@ import org.stjs.javascript.annotation.STJSBridge;
  */
 @STJSBridge
 public abstract class Structure extends ScreepsObject {
-    public StructureTypes structureType;
+    public String structureType;
     public int hits = 0;
     public int hitsMax = 0;
     public boolean my = false;

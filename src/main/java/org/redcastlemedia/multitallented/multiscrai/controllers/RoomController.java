@@ -2,6 +2,7 @@ package org.redcastlemedia.multitallented.multiscrai.controllers;
 
 import org.redcastlemedia.multitallented.helpers.Lodash;
 import org.redcastlemedia.multitallented.helpers.LodashCallback1;
+import org.redcastlemedia.multitallented.multiscrai.orders.DepositEnergyOrder;
 import org.redcastlemedia.multitallented.multiscrai.orders.HarvestOrder;
 import org.redcastlemedia.multitallented.multiscrai.orders.RespawnOrder;
 import org.redcastlemedia.multitallented.multiscrai.roles.CreepRole;
@@ -9,7 +10,6 @@ import org.redcastlemedia.multitallented.multiscrai.roles.StructureRole;
 import org.redcastlemedia.multitallented.multiscrai.roles.creeputil.CreepUtil;
 import org.redcastlemedia.multitallented.screeps.*;
 import org.redcastlemedia.multitallented.screeps.global.FindTypes;
-import org.redcastlemedia.multitallented.screeps.global.StructureTypes;
 import org.redcastlemedia.multitallented.screeps.global.console;
 import org.redcastlemedia.multitallented.screeps.structures.Spawn;
 import org.redcastlemedia.multitallented.screeps.structures.Structure;
@@ -92,7 +92,7 @@ public class RoomController {
                 }
             }
 
-            if (structure.structureType == StructureTypes.STRUCTURE_SPAWN) {
+            if (structure.structureType.equals("spawn")) {
                 spawn = (Spawn) structure;
             }
         }
@@ -133,5 +133,9 @@ public class RoomController {
         }
 
         cpuMemory.$put(name, value);
+    }
+
+    public String getAvailableDepositEnergy(RoomPosition pos) {
+        return DepositEnergyOrder.getAvailableDepositEnergy(pos);
     }
 }

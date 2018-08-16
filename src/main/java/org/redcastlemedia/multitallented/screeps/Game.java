@@ -1,5 +1,6 @@
 package org.redcastlemedia.multitallented.screeps;
 
+import org.redcastlemedia.multitallented.screeps.global.ScreepsObject;
 import org.redcastlemedia.multitallented.screeps.structures.Spawn;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.JSCollections;
@@ -23,8 +24,10 @@ public class Game {
         time = (int) (Math.floor(Math.random() * 100000) + 100000);
     }
 
-    public static Object getObjectById(Object target) {
-        return null;
+    public static ScreepsObject getObjectById(String target) {
+        ScreepsObject screepsObject = new ScreepsObject();
+        screepsObject.id = target;
+        return screepsObject;
     }
 
     public static class cpu {

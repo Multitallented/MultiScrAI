@@ -19,7 +19,22 @@ public class RespawnOrder {
                            RoomController roomController) {
 
         Integer upgraderCount = creepTypes.$get(CreepType.UPGRADER.toString());
-        if ((upgraderCount == null || upgraderCount < 1) && roomController.getRoom().energyAvailable > 199) {
+        Integer harvesterCount = creepTypes.$get(CreepType.HARVESTER.toString());
+        if ((harvesterCount == null || harvesterCount < 1) && roomController.getRoom().energyAvailable > 199) {
+            Array<PartTypes> body = new Array<>();
+            body.push(PartTypes.WORK);
+            body.push(PartTypes.CARRY);
+            body.push(PartTypes.MOVE);
+
+            Map<String, String> memory = JSCollections.$map("role", CreepType.HARVESTER.toString());
+
+            Map<String, Object> options = JSCollections.$map("memory", (Object) memory);
+
+            spawn.spawnCreep(body,CreepType.HARVESTER.toString() + Game.time, options);
+            return;
+        }
+//        if ((upgraderCount == null || upgraderCount < 1) && roomController.getRoom().energyAvailable > 199) {
+        if (roomController.getRoom().energyAvailable > 199) {
             Array<PartTypes> body = new Array<>();
             body.push(PartTypes.WORK);
             body.push(PartTypes.CARRY);
@@ -30,6 +45,7 @@ public class RespawnOrder {
             Map<String, Object> options = JSCollections.$map("memory", (Object) memory);
 
             spawn.spawnCreep(body,CreepType.UPGRADER.toString() + Game.time, options);
+            return;
         }
     }
 }
